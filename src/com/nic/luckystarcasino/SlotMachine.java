@@ -1,5 +1,6 @@
 package com.nic.luckystarcasino;
 
+import java.sql.SQLOutput;
 import java.util.Scanner;
 import java.util.Random;
 
@@ -7,26 +8,25 @@ public class SlotMachine {
 
     static void main(String[] args) {
 
-        //  JAVA SLOT MACHINE
         Scanner scanner = new Scanner(System.in);
         int balance = 1000;
         int bet;
         int payout;
         String[] row;
+        String playAgain;
 
-        //  DISPLAY WELCOME MESSAGE (Welcome to Sarsaparilla Slots!)
+
         System.out.println("************************************");
         System.out.println("   Welcome to Sarsaparilla Slots!   ");
         System.out.println("      Symbols: 🍾 🤠 🐎 ⭐ 🔫");
         System.out.println("**************************************");
 
 
-        //  PLAY IF BALANCE >0
-
         while (balance > 0) {
             System.out.println("Current balance: $" + balance);
             System.out.print("Place your bet amount: ");
             bet = scanner.nextInt();
+            scanner.nextLine();
 
             if (bet > balance) {
                 System.out.println("INSUFFICIENT FUNDS");
@@ -51,9 +51,16 @@ public class SlotMachine {
             }
 
             //  ASK TO PLAY AGAIN
-            //  DISPLAY EXIT MESSAGE
+            System.out.println("Do you want to play again?: (Y/N): ");
+            playAgain = scanner.nextLine().toUpperCase();
 
+            if(!playAgain.equals("Y")) {
+                break;
+            }
         }
+        System.out.println("Game Over! Your final balance is $" + balance);
+        System.out.println("Come on back now, you hear!");
+
         scanner.close();
     }
         static String[] spinRow() {
@@ -95,7 +102,16 @@ public class SlotMachine {
                     case "🔫" -> bet * 1;
                     default -> 0;
                 };
-            }
+            } else if(row[1].equals(row[2])){
+        return switch(row[1]) {
+            case "🍾" -> bet * 3;
+            case "🤠" -> bet * 2;
+            case "🐎" -> bet * 2;
+            case "⭐" -> bet * 1;
+            case "🔫" -> bet * 1;
+            default -> 0;
+        };
+    }
 
             return 0;
         }
