@@ -40,8 +40,8 @@ public class SlotMachine {
 
             //  SPIN ROW
             System.out.println("Spinning...");
-            spinRow();
-
+            row = spinRow();
+            printRow(row);
 
             //  PRINT ROW OF EMOJIS
             //  GET A PAYOUT
@@ -63,9 +63,11 @@ public class SlotMachine {
                 row[i] = symbols[random.nextInt(symbols.length)];
             }
 
-            System.out.println(row[0] + row[1] + row[2]);
-
-
-            return new String[0];
+            return row;
+        }
+        static void printRow(String[] row) {
+            System.out.println("***************");
+            System.out.println(" " + String.join(" | ", row));
+            System.out.println("***************");
         }
 }
