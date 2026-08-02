@@ -6,7 +6,7 @@ public class CasinoApplication {
 
     static void main(String[] args) {
 
-        new Scanner(System.in);
+        Scanner scanner new Scanner(System.in);
 
         int balance = 1000;
 
