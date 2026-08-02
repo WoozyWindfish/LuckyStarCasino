@@ -29,7 +29,7 @@ public class CasinoApplication {
             System.out.println("Invalid option");
         }
 
-
+        scanner.close();
 
     }
 
