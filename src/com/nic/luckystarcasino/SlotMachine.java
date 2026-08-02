@@ -17,7 +17,7 @@ public class SlotMachine {
         //  DISPLAY WELCOME MESSAGE (Welcome to Sarsaparilla Slots!)
         System.out.println("************************************");
         System.out.println("   Welcome to Sarsaparilla Slots!   ");
-        System.out.println("      Symbols: 🍾 🤠 🐎 🌟 🔫");
+        System.out.println("      Symbols: 🍾 🤠 🐎 ⭐ 🔫");
         System.out.println("**************************************");
 
 
@@ -38,13 +38,18 @@ public class SlotMachine {
                 System.out.println("$" + balance);
             }
 
-            //  SPIN ROW
             System.out.println("Spinning...");
             row = spinRow();
             printRow(row);
+            payout = getPayout(row, bet);
 
-            //  PRINT ROW OF EMOJIS
-            //  GET A PAYOUT
+            if (payout > 0) {
+                System.out.println("You won $" + payout);
+                balance += payout;
+            } else {
+                System.out.println("Sorry, better luck next time cowboy!");
+            }
+
             //  ASK TO PLAY AGAIN
             //  DISPLAY EXIT MESSAGE
 
@@ -53,7 +58,7 @@ public class SlotMachine {
     }
         static String[] spinRow() {
 
-            String[] symbols = {"🍾", "🤠", "🐎", "🌟", "🔫"};
+            String[] symbols = {"🍾", "🤠", "🐎", "⭐", "🔫"};
             String[] row = new String[3];
             Random random = new Random();
 
@@ -70,4 +75,29 @@ public class SlotMachine {
             System.out.println(" " + String.join(" | ", row));
             System.out.println("***************");
         }
+        static int getPayout(String[] row, int bet) {
+
+            if(row[0].equals(row[1]) && row[1].equals(row[2])){
+                return switch(row[0]) {
+                    case "🍾" -> bet * 10;
+                    case "🤠" -> bet * 6;
+                    case "🐎" -> bet * 4;
+                    case "⭐" -> bet * 3;
+                    case "🔫" -> bet * 2;
+                    default -> 0;
+                };
+            } else if(row[0].equals(row[1])){
+                return switch(row[0]) {
+                    case "🍾" -> bet * 3;
+                    case "🤠" -> bet * 2;
+                    case "🐎" -> bet * 2;
+                    case "⭐" -> bet * 1;
+                    case "🔫" -> bet * 1;
+                    default -> 0;
+                };
+            }
+
+            return 0;
+        }
+
 }
